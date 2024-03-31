@@ -1,0 +1,33 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - Cakeaholic</title>
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+</head>
+<body>
+    {% include 'navbaralt.html' %}
+    <div class="about-container">
+        <h1>About Cakeaholic</h1>
+        <img src="{% static 'images/bakery.jpg' %}" alt="Our Bakery" class="about-image">
+        <p>Welcome to Cakeaholic, where each pastry tells a story. Founded in the heart of [Your City], our bakery is a haven for those who appreciate the finer aspects of baking and the artistry behind every confection.</p>
+
+        <h2>Our Journey</h2>
+        <p>Our journey began [Years] years ago, with a simple mission: to bring joy through the universal language of sweets. What started as a small family-run bakery has now blossomed into a beloved community staple, known for its innovative flavors, commitment to quality, and the warmth of its welcome.</p>
+
+        <h2>Our Philosophy</h2>
+        <p>At Cakeaholic, we believe in the power of homemade treats to bring people together. Our recipes are crafted with care, using only the finest ingredients and a pinch of love in every batch. We're not just baking cakes; we're creating memories.</p>
+
+        <h2>Meet the Team</h2>
+        <p>Behind every delightful treat is our team of passionate bakers and pastry chefs, led by [Founder's Name]. With years of experience and a tireless dedication to their craft, our team ensures that every visit to Cakeaholic is a sweet adventure.</p>
+
+        <h2>Join Our Sweet Journey</h2>
+        <p>We invite you to experience the magic of Cakeaholic. Whether it's your first visit or you're a long-time friend, there's always something new to discover within our walls. Come share in our passion for pastry, and let's make the world a sweeter place, one bite at a time.</p>
+    </div>
+
+    <script src="{% static 'customer/script.js' %}"></script>
+</body>
+</html>

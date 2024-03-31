@@ -1,0 +1,341 @@
+
+
+.login-container {
+    background-color: #fff;
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 400px;
+    text-align: center;
+    align-content: center;
+}
+
+.login-container h1 {
+    color: #892f4e;
+    margin-bottom: 20px;
+}
+
+.input-group {
+    text-align: left;
+    margin-bottom: 15px;
+}
+
+.input-group label {
+    display: block;
+    color: #666;
+    margin-bottom: 5px;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+button {
+    width: 100%;
+    padding: 10px;
+    background-color: #892f4e;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-top: 10px;
+}
+
+button:hover {
+    background-color: #7b2a46;
+}
+
+a {
+    color: #892f4e;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+.dashboard-container {
+    max-width: 600px;
+    margin: auto;
+    text-align: center;
+}
+
+.dashboard-nav ul {
+    list-style: none;
+    padding: 0;
+}
+
+.dashboard-nav li {
+    display: inline-block;
+    margin: 0 10px;
+}
+
+.dashboard-nav a {
+    text-decoration: none;
+    color: #892f4e;
+}
+
+.logout-button {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 10px 20px;
+    background-color: #892f4e;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+}
+
+.logout-button:hover {
+    background-color: #7b2a46;
+}
+
+
+
+
+
+
+/* DASHBOARD */
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f0f0f0;
+    line-height: 1.6;
+    padding-top: 70px; /* Adjust to ensure content doesn't hide under the navbar */
+    
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh; /* Use the full height of the viewport */
+    background-color: #f0f0f0;
+    padding: 0; /* Remove any default padding */
+    margin: 0; /* Remove any default margin */
+}
+
+.navbar {
+    background: #892f4e;
+    color: #fff;
+    padding: 10px 20px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.navbar-brand, .nav-link, .logout-button {
+    color: #fff;
+    text-decoration: none;
+    padding: 10px;
+    margin: 0 5px; /* Adjust spacing between links */
+}
+
+.nav-link:hover, .logout-button:hover {
+    background-color: #7b2a46;
+    border-radius: 5px;
+}
+
+.logout-button {
+    border: 1px solid #fff; /* Make logout look like a button */
+    padding: 5px 15px;
+}
+
+.main-content {
+    margin: auto;
+    padding: 20px;
+    max-width: 960px; /* Adjust based on your layout preference */
+}
+
+.product-section {
+    margin-top: 20px;
+}
+
+.product-card {
+    background: #fff;
+    padding: 20px;
+    margin-bottom: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    display: flex;
+    align-items: center;
+}
+
+.product-image {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    margin-right: 20px;
+    border-radius: 5px;
+}
+
+.product-details {
+    flex: 1;
+}
+
+.product-name {
+    color: #892f4e;
+    font-size: 1.25rem;
+    margin-bottom: 10px;
+}
+
+.product-description, .product-price {
+    color: #333;
+    margin-bottom: 5px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .navbar {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .nav-link, .logout-button {
+        padding: 5px 0; /* Reduce padding for smaller screens */
+    }
+
+    .product-card {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .product-image {
+        margin-bottom: 10px;
+    }
+}
+
+
+
+/* ORDER STATUS */
+
+.order-status-table .table {
+    width: 100%;
+    background-color: #fff;
+    margin-top: 20px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    border-collapse: collapse;
+}
+
+.order-status-table th, .order-status-table td {
+    padding: 15px;
+    border: 1px solid #ddd;
+    text-align: left;
+}
+
+.order-status-table th {
+    background-color: #892f4e;
+    color: #fff;
+}
+
+.order-status-table tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+
+/* DELIVERY SETTINGS */
+
+.delivery-options-form {
+    background-color: #fff;
+    padding: 40px; /* Increased padding for more space inside the form */
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2); /* Slightly deeper shadow for better focus */
+    width: 100%;
+    max-width: 600px; /* Increased max-width for more horizontal space */
+    margin: 40px auto; /* Increased top and bottom margin, auto for horizontal centering */
+    text-align: left; /* Align text to the left for a standard form appearance */
+}
+
+.delivery-options-form h1 {
+    color: #892f4e;
+    margin-bottom: 20px;
+}
+
+.input-group {
+    margin-bottom: 20px;
+}
+
+.input-group label {
+    display: block;
+    color: #666;
+    margin-bottom: 5px;
+}
+
+.input-group input, .input-group textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.input-group textarea {
+    resize: vertical; /* Allows vertical resizing, prevents horizontal */
+}
+
+.btn-primary {
+    background-color: #892f4e;
+    border-color: #892f4e;
+}
+
+.btn-primary:hover {
+    background-color: #7b2a46;
+    border-color: #7b2a46;
+}
+
+
+/* ABOUT */
+
+.about-container {
+    max-width: 800px;
+    margin: 40px auto;
+    padding: 20px;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.about-container h1, .about-container h2 {
+    color: #892f4e;
+}
+
+.about-container p {
+    margin-bottom: 20px;
+    line-height: 1.6;
+}
+
+.about-image {
+    width: 100%;
+    max-width: 400px;
+    height: auto;
+    display: block;
+    margin: 20px auto;
+    border-radius: 10px;
+}
+
+
+
+/* HISTORY */
+
+.message-history {
+    margin-bottom: 30px;
+}
+
+.message {
+    background: #f9f9f9;
+    padding: 15px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    border: 1px solid #eaeaea;
+}
+
+.message p {
+    margin-bottom: 5px;
+}

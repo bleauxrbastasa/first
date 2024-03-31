@@ -1,0 +1,62 @@
+{% extends 'inventory/main.html' %}
+
+{% load static %}
+	
+{% block content %}
+
+<h1 class="container-fluid text-center d-lg-none dashboard-num">Dashboard</h1>
+<div class="container-fluid">
+	<div class="row">
+		
+		<div class="btn col-sm-12 col-md-12 col-lg-6">
+			<a href="{% url 'inventory' %}">
+				<div class="card inventory-card flex-row align-items-center text-left" style="gap: 40px;">
+					<img class="dashboard-header-img" src="{% static 'inventory/images/ingredients.jpg' %}"/>
+					<div class="dashboard-label">
+						<h1 class="dashboard-num">24</h1>
+						<h2>Ingredients</h2>
+					</div>
+				</div>
+			</a>
+		</div>
+		
+		<div class="btn col-sm-12 col-md-12 col-lg-6">
+			<a href="{% url 'inventory' %}">
+				<div class="card inventory-card flex-row align-items-center text-left" style="gap: 40px;">
+					<img class="dashboard-header-img" src="{% static 'inventory/images/pastries.jpg' %}"/>
+					<div class="dashboard-label">
+						<h1 class="dashboard-num">18</h1>
+						<h2>Pastries in Stock</h2>
+					</div>
+				</div>
+			</a>
+		</div>
+
+		<div class="btn col-sm-12 col-md-12 col-lg-6">
+			<a href="{% url 'inventory' %}">
+				<div class="card inventory-card flex-row align-items-center text-left" style="gap: 40px;">
+					<img class="dashboard-header-img" src="{% static 'inventory/images/inbox.jpg' %}"/>
+					<div class="dashboard-label">
+						<h1 class="dashboard-num">5</h1>
+						<h2>New Orders</h2>
+					</div>
+				</div>
+			</a>
+		</div>
+		
+		<div class="btn col-sm-12 col-md-12 col-lg-6">
+			<a class="nav-item" href="{% url 'inventory' %}">
+				<div class="card inventory-card flex-row align-items-center text-left" style="gap: 40px;">
+					<img class="dashboard-header-img" src="{% static 'inventory/images/deli.jpg' %}"/>
+					<div class="dashboard-label">
+						<h1 class="dashboard-num">7</h1>
+						<h2>Scheduled Deliveries</h2>
+					</div>
+				</div>
+			</a>
+		</div>
+		
+	</div>
+</div>
+
+{% endblock content%}
