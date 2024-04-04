@@ -1,0 +1,88 @@
+{% extends 'inventory/main.html' %}
+{% load static %}
+
+{% block content %}
+
+<style>
+    /* Expiry Styles */
+    .expiry-container {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 20px;
+    }
+
+    .expiry-item {
+        margin-bottom: 20px;
+        padding: 20px;
+        background-color: #fff;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .expiry-item h2 {
+        margin-top: 0;
+        font-size: 24px;
+        color: #333;
+    }
+
+    .expiry-item p {
+        margin: 10px 0;
+        font-size: 16px;
+        color: #666;
+    }
+
+    .expiry-item .expiry-date {
+        background-color: #ffc107;
+        color: #333;
+        padding: 5px 10px;
+        border-radius: 5px;
+        font-weight: bold;
+    }
+
+    .expiry-item .action-buttons {
+        margin-top: 10px;
+    }
+
+    .expiry-item .action-buttons a {
+        display: inline-block;
+        padding: 5px 10px;
+        margin-right: 10px;
+        text-decoration: none;
+        border-radius: 5px;
+        font-size: 14px;
+        transition: background-color 0.3s;
+    }
+
+    .expiry-item .action-buttons a.delete-btn {
+        background-color: #dc3545;
+        color: #fff;
+    }
+
+    .expiry-item .action-buttons a.update-btn {
+        background-color: #007bff;
+        color: #fff;
+    }
+
+    .expiry-item .action-buttons a:hover {
+        opacity: 0.8;
+    }
+</style>
+
+<div class="expiry-container">
+    <h1>Expiring Products</h1>
+    {% for item in expiring_items %}
+        <div class="expiry-item">
+            <h2>{{ item.name }}</h2>
+            <p>Expiry Date: <span class="expiry-date">{{ item.expiry_date }}</span></p>
+            <p>Quantity: {{ item.quantity }}</p>
+            <div class="action-buttons">
+                <a href="{% url 'delete_item' item.id %}" class="delete-btn">Delete</a>
+                <a href="{% url 'update_item' item.id %}" class="update-btn">Update</a>
+            </div>
+        </div>
+    {% empty %}
+        <p>No products expiring within a month.</p>
+    {% endfor %}
+</div>
+
+{% endblock content %}
