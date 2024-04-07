@@ -389,41 +389,78 @@ body {
 /* If you have action buttons within your cards, add styles here */
 
 
-
+/* Cart Popup Styles */
 .cart-popup {
-    position: absolute;
-    right: 0;
-    background: white;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    padding: 10px;
-    width: 300px; /* Adjust as needed */
-    z-index: 10;
+    position: fixed;
+    top: 80px;
+    right: 20px;
+    width: 350px;
+    background-color: #fff; /* Background color is white */
+    color: #000; /* Sets the default text color to black */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    border-radius: 8px;
+    padding: 25px;
+    z-index: 1050;
+    overflow-y: auto;
+    max-height: 60vh;
 }
 
+.cart-item,
+.cart-popup h5,
+.cart-popup .payment-mode h6 {
+    color: #000; /* Ensures all text within the popup is black */
+}
+
+/* Adjustments for individual cart items */
 .cart-item {
     display: flex;
+    align-items: center;
     justify-content: space-between;
-    margin-bottom: 5px;
+    padding: 15px 0;
+    border-bottom: 1px solid #eee;
 }
 
-.cart-item input[type="number"] {
-    width: 50px;
+.cart-item:last-child {
+    border-bottom: none;
 }
 
-.cart-popup {
-    /* Existing styles */
-    color: black; /* Set text color to black */
+/* Styles for the payment mode section */
+.payment-mode {
+    margin-top: 20px;
 }
 
-.cart-item {
-    /* Existing styles */
-    align-items: center; /* Ensure items are vertically aligned */
+.payment-mode select {
+    color: #000; /* Ensures the select dropdown text is black */
 }
 
-.cart-item label, .cart-item span {
-    margin-right: 10px; /* Add some spacing */
+/* Checkout button styles */
+.btn-secondary {
+    width: 100%;
+    margin-top: 20px;
 }
+
+/* Styles for Cart Icon and Count Badge */
+#cartButton {
+    position: relative;
+    display: inline-block;
+}
+
+#cartCount {
+    position: absolute;
+    top: -10px;
+    right: -10px;
+    background-color: #dc3545;
+    color: #fff; /* Text color for the count badge */
+    border-radius: 50%;
+    padding: 5px;
+    font-size: 0.8rem;
+}
+
+
+
+
+
+
 
 .quantity-input {
     width: 50px; /* Width of the quantity input field */

@@ -167,7 +167,7 @@ def send_message(request):
 # customer/views.py
 
 from django.shortcuts import render
-from inventory.models import inventoryItem  # Import the inventoryItem model from the inventory app
+from inventory.models import inventoryItem  # Adjust the import based on your model name and app
 
 def customer_dashboard(request):
     items = inventoryItem.objects.all()  # Fetch all inventory items
