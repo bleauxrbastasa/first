@@ -44,7 +44,8 @@
                         {% if item.expiry_date %}
                         <p class="card-text"><small class="text-muted">Expires on: {{ item.expiry_date }}</small></p>
                         {% endif %}
-                        <button class="btn btn-primary add-to-cart" data-id="{{ item.id }}">Add to Cart</button>
+                        <button class="btn btn-primary add-to-cart" data-id="{{ item.id }}" data-name="{{ item.name }}" data-price="{{ item.price }}">Add to Cart</button>
+
                     </div>
                 </div>
             </div>
