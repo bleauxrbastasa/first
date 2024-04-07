@@ -1,0 +1,75 @@
+{% extends 'inventory/main.html' %}
+
+{% block content %}
+<div class="expiry-container">
+    <h1>Add Scheduled Delivery</h1>
+    <div class="expiry-item">
+        <form method="post">
+            {% csrf_token %}
+            <div class="mb-3">
+                {{ form.tracking_id.label_tag }}
+                {{ form.tracking_id }}
+            </div>
+            <div class="mb-3">
+                {{ form.delivery_status.label_tag }}
+                {{ form.delivery_status }}
+            </div>
+            <div class="mb-3">
+                {{ form.payment_type.label_tag }}
+                {{ form.payment_type }}
+            </div>
+            <button type="submit" class="btn btn-primary">Add Delivery</button>
+        </form>
+    </div>
+</div>
+
+<style>
+    /* Expiry Styles */
+    .expiry-container {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 20px;
+    }
+
+    .expiry-item {
+        background-color: #fff;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        padding: 20px;
+        margin-bottom: 20px;
+    }
+
+    .expiry-item h1 {
+        font-size: 24px;
+        color: #333;
+        margin-top: 0;
+        margin-bottom: 20px;
+    }
+
+    .expiry-item form {
+        width: 100%;
+    }
+
+    .expiry-item form .mb-3 {
+        margin-bottom: 20px;
+    }
+
+    .expiry-item form label {
+        display: block;
+        font-weight: bold;
+        margin-bottom: 5px;
+    }
+
+    .expiry-item form input[type="text"],
+    .expiry-item form select {
+        width: 100%;
+        padding: 8px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+    }
+
+    .expiry-item form .btn {
+        margin-top: 10px;
+    }
+</style>
+{% endblock %}

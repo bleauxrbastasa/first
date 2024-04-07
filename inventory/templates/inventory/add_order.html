@@ -1,0 +1,73 @@
+{% extends 'inventory/main.html' %}
+{% load static %}
+
+{% block content %}
+<style>
+    /* Add your custom CSS styles here */
+    .order-form-container {
+        max-width: 500px;
+        margin: 0 auto;
+        padding: 20px;
+        background-color: #fff;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .order-form-container h1 {
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+    .order-form-container form {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .order-form-container label {
+        margin-bottom: 10px;
+    }
+
+    .order-form-container input[type="number"] {
+        padding: 10px;
+        margin-bottom: 20px;
+        border-radius: 5px;
+        border: 1px solid #ccc;
+    }
+
+    .order-form-container select {
+        padding: 10px;
+        margin-bottom: 20px;
+        border-radius: 5px;
+        border: 1px solid #ccc;
+    }
+
+    .order-form-container #total-price {
+        margin-top: 20px;
+        font-weight: bold;
+    }
+
+    .order-form-container button {
+        padding: 10px 20px;
+        background-color: #4CAF50;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+    }
+
+    .order-form-container button:hover {
+        background-color: #45a049;
+    }
+</style>
+
+<div class="order-form-container">
+    <h1>Add New Order</h1>
+    <form method="post" id="order-form">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Place Order</button>
+    </form>
+</div>
+
+{% endblock %}

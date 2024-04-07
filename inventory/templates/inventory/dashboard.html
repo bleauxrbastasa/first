@@ -1,67 +1,154 @@
 {% extends 'inventory/main.html' %}
-
 {% load static %}
 	
 {% block content %}
 <style>
-	    body {
+    body {
         font-family: Arial, sans-serif;
         background-color: #f0f0f0;
         margin: 0;
         padding: 0;
     }
-	.floating-btn{
-		width: 80px;
-		height: 80px;
-		background: #731436;
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		text-decoration: none;
-		border-radius: 50%;
-		color: white;
-		font-size: 60px;
-		box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.5);
-		position: fixed;
-		right: 20px;
-		bottom: 20px;
-		z-index: 5;
-		transition: background 0.25s;
-		border: none;
-		cursor: pointer;
+    .floating-btn{
+        width: 80px;
+        height: 80px;
+        background: #731436;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-decoration: none;
+        border-radius: 50%;
+        color: white;
+        font-size: 60px;
+        box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.5);
+        position: fixed;
+        right: 20px;
+        bottom: 20px;
+        z-index: 5;
+        transition: background 0.25s;
+        border: none;
+        cursor: pointer;
+    }
+    .floating-btn:hover {
+        background: #621436;
+        color: white;
+    }
+	.inventory-list {
+		list-style: none;
+		padding: 0;
 	}
-	.floating-btn:hover {
-		background: #621436;
-		color: white;
+	
+	.inventory-item {
+		background-color: #f9f9f9;
+		border: 1px solid #ddd;
+		border-radius: 5px;
+		padding: 15px;
+		margin-bottom: 15px;
+		transition: all 0.3s ease;
 	}
+	
+	.inventory-item:hover {
+		transform: translateY(-3px);
+		box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+	}
+	
+	.item-name {
+		margin-top: 0;
+		margin-bottom: 5px;
+		color: #333;
+	}
+	
+	.description {
+		margin-bottom: 10px;
+	}
+	
+	.item-details {
+		margin-left: 20px;
+	}
+	
+	.expiry-date,
+	.quantity {
+		margin: 5px 0;
+		color: #666;
+	}
+	
 </style>
 <h1 class="container-fluid text-center d-lg-none dashboard-num">Dashboard</h1>
 <div class="container-fluid">
-	<div class="row">
-		<a href="{% url 'create_item'%}" class="floating-btn">+</a>
+    <div class="row">
+        <a href="{% url 'create_item'%}" class="floating-btn">+</a>
+        <div class="btn col-sm-12 col-md-12 col-lg-6">
+            <a href="{% url 'inventory' %}">
+                <div class="card inventory-card flex-row align-items-center text-left" style="gap: 40px;">
+                    <img class="dashboard-header-img" src="{% static 'inventory/images/stock.png' %}"/>
+                    <div class="dashboard-label">
+                        <h1 class="dashboard-num">Inventory</h1>
+                    </div>
+                </div>
+            </a>
+        </div>
+        
+        <div class="btn col-sm-12 col-md-12 col-lg-6">
+            <a href="{% url 'expiry' %}">
+                <div class="card inventory-card flex-row align-items-center text-left" style="gap: 40px;">
+                    <img class="dashboard-header-img" src="{% static 'inventory/images/expire.png' %}"/>
+                    <div class="dashboard-label">
+                        <h1 class="dashboard-num">Expiry</h1>
+                    </div>
+                </div>
+            </a>
+        </div>
+
 		<div class="btn col-sm-12 col-md-12 col-lg-6">
-			<a href="{% url 'inventory' %}">
-				<div class="card inventory-card flex-row align-items-center text-left" style="gap: 40px;">
-					<img class="dashboard-header-img" src="{% static 'inventory/images/stock.png' %}"/>
-					<div class="dashboard-label">
-						<h1 class="dashboard-num">Inventory</h1>
-					</div>
-				</div>
-			</a>
-		</div>
-		
+            <a href="{% url 'delivery_list' %}">
+                <div class="card inventory-card flex-row align-items-center text-left" style="gap: 40px;">
+                    <img class="dashboard-header-img" src="{% static 'inventory/images/del.png' %}"/>
+                    <div class="dashboard-label">
+                        <h1 class="dashboard-num">Deliveries</h1>
+                    </div>
+                </div>
+            </a>
+        </div>
+
 		<div class="btn col-sm-12 col-md-12 col-lg-6">
-			<a href="{% url 'expiry' %}">
-				<div class="card inventory-card flex-row align-items-center text-left" style="gap: 40px;">
-					<img class="dashboard-header-img" src="{% static 'inventory/images/expire.png' %}"/>
-					<div class="dashboard-label">
-						<h1 class="dashboard-num">Expiry</h1>
+            <a href="{% url 'all_orders' %}">
+                <div class="card inventory-card flex-row align-items-center text-left" style="gap: 40px;">
+                    <img class="dashboard-header-img" src="{% static 'inventory/images/order.png' %}"/>
+                    <div class="dashboard-label">
+                        <h1 class="dashboard-num">Orders</h1>
+                    </div>
+                </div>
+            </a>
+        </div>
+
+    </div>
+
+	
+
+	{% comment %} <div class="container">
+		<h1 class="inventory-title">Inventory</h1>
+		<a href="{% url 'create_item' %}" class="floating-btn">+</a>
+		<ul class="inventory-list">
+			{% for i in item %}
+				<li class="inventory-item">
+					<a href="{% url 'update_item' i.id %}">
+						<h2 class="item-name">{{ i.name }}</h2>
+					</a>
+					<p class="description">Description: {{ i.description }}</p>
+					<div class="item-details">
+						{% if i.expiry_date %}
+							<p class="expiry-date">Expiry Date: {{ i.expiry_date }}</p>
+						{% else %}
+							<p class="expiry-date">No expiry date specified</p>
+						{% endif %}
+						<p class="quantity">Quantity: {{ i.quantity }}</p>
 					</div>
-				</div>
-			</a>
-		</div>
-		
-	</div>
+				</li>
+			{% endfor %}
+		</ul>
+	</div> {% endcomment %}
+	
+	
 </div>
 
 {% endblock content%}
