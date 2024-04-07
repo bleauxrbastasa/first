@@ -1,154 +1,154 @@
-{% extends 'inventory/main.html' %}
+    {% extends 'inventory/main.html' %}
 
-{% load static %}
+    {% load static %}
 
-{% block content %}
+    {% block content %}
 
-<meta charset="UTF-8">
-<meta https-equiv='X-UA-Compatible' content='IE=edge'>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<style>
-    /* Main Styles */
+    <meta charset="UTF-8">
+    <meta https-equiv='X-UA-Compatible' content='IE=edge'>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        /* Main Styles */
 
-    .floating-btn{
-        width: 80px;
-        height: 80px;
-        background: #731436;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        text-decoration: none;
-        border-radius: 50%;
-        color: white;
-        font-size: 60px;
-        box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.5);
-        position: fixed;
-        right: 20px;
-        bottom: 20px;
-        z-index: 5;
-        transition: background 0.25s;
-        outline: blue;
-        border: none;
-        cursor: pointer;
-    }
-    .floating-btn:hover {
-        background: #621436;
-    }
-    body {
-        font-family: Arial, sans-serif;
-        background-color: #f0f0f0;
-        margin: 0;
-        padding: 0;
-    }
+        .floating-btn{
+            width: 80px;
+            height: 80px;
+            background: #731436;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            border-radius: 50%;
+            color: white;
+            font-size: 60px;
+            box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.5);
+            position: fixed;
+            right: 20px;
+            bottom: 20px;
+            z-index: 5;
+            transition: background 0.25s;
+            outline: blue;
+            border: none;
+            cursor: pointer;
+        }
+        .floating-btn:hover {
+            background: #621436;
+        }
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 0;
+        }
 
-    .container {
-        max-width: 1200px;
-        margin: 0 auto;
-        padding: 20px;
-    }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
 
-    .inventory-card {
-        background-color: #fff;
-        border-radius: 10px;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        overflow: hidden;
-        transition: transform 0.3s ease-in-out;
-    }
+        .inventory-card {
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            transition: transform 0.3s ease-in-out;
+        }
 
-    .inventory-card:hover {
-        transform: translateY(-5px);
-    }
+        .inventory-card:hover {
+            transform: translateY(-5px);
+        }
 
-    .inventory-card img {
-        width: 100%;
-        height: 200px;
-        object-fit: cover;
-        display: block;
-    }
+        .inventory-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            display: block;
+        }
 
-    .inventory-card .card-content {
-        padding: 20px;
-    }
+        .inventory-card .card-content {
+            padding: 20px;
+        }
 
-    .inventory-card h2.card-title {
-        margin-top: 0;
-        font-size: 24px;
-        color: #333;
-    }
+        .inventory-card h2.card-title {
+            margin-top: 0;
+            font-size: 24px;
+            color: #333;
+        }
 
-    .inventory-card p.expiry-date {
-        margin-top: 10px;
-        font-size: 14px;
-        color: #666;
-    }
+        .inventory-card p.expiry-date {
+            margin-top: 10px;
+            font-size: 14px;
+            color: #666;
+        }
 
-    .inventory-card p.quantity {
-        font-size: 14px;
-        color: #666;
-    }
+        .inventory-card p.quantity {
+            font-size: 14px;
+            color: #666;
+        }
 
-    .inventory-card .action-buttons {
-        margin-top: 20px;
-    }
+        .inventory-card .action-buttons {
+            margin-top: 20px;
+        }
 
-    .inventory-card .action-buttons a {
-        display: inline-block;
-        padding: 10px 20px;
-        margin-right: 10px;
-        text-decoration: none;
-        border-radius: 5px;
-        font-size: 14px;
-        transition: background-color 0.3s;
-    }
+        .inventory-card .action-buttons a {
+            display: inline-block;
+            padding: 10px 20px;
+            margin-right: 10px;
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 14px;
+            transition: background-color 0.3s;
+        }
 
-    .inventory-card .action-buttons a.delete-btn {
-        background-color: #ff4d4d;
-        color: #fff;
-    }
+        .inventory-card .action-buttons a.delete-btn {
+            background-color: #ff4d4d;
+            color: #fff;
+        }
 
-    .inventory-card .action-buttons a.update-btn {
-        background-color: #007bff;
-        color: #fff;
-    }
+        .inventory-card .action-buttons a.update-btn {
+            background-color: #007bff;
+            color: #fff;
+        }
 
-    .inventory-card .action-buttons a:hover {
-        opacity: 0.8;
-    }
-</style>
+        .inventory-card .action-buttons a:hover {
+            opacity: 0.8;
+        }
+    </style>
 
-<body>
-    <div class="container">
-		<h1 class="inventory-title">Inventory</h1>
-        <a href="{% url 'create_item' %}" class="floating-btn">+</a>
-        <div class="row">
-            {% for i in item %}
-                <div class="col-sm-6 col-md-4 col-lg-3">
-                    <div class="card inventory-card">
-                        <a href="{% url 'update_item' i.id %}">
-                            {% if i.item_pic %}
-                                <img src="{{ i.item_pic.url }}" alt="{{ i.name }}">
-                            {% else %}
-                                <img src="{% static 'inventory/images/default-item.jpg' %}" alt="Default Image">
-                            {% endif %}
-                        </a>
-                        <div class="card-content">
-                            <h2 class="card-title">{{ i.name }}</h2>
-                            {% if i.expiry_date %}
-                                <p class="expiry-date">Expiry Date: {{ i.expiry_date }}</p>
-                            {% else %}
-                                <p class="expiry-date">No expiry date specified</p>
-                            {% endif %}
-                            <p class="quantity">Quantity: {{ i.quantity }}</p>
-                            <div class="action-buttons">
-                                <a href="{% url 'delete_item' i.id %}" class="delete-btn">DELETE</a>
-                                <a href="{% url 'update_item' i.id %}" class="update-btn">UPDATE</a>
+    <body>
+        <div class="container">
+            <h1 class="inventory-title">Inventory</h1>
+            <a href="{% url 'create_item' %}" class="floating-btn">+</a>
+            <div class="row">
+                {% for i in item %}
+                    <div class="col-sm-6 col-md-4 col-lg-3">
+                        <div class="card inventory-card">
+                            <a href="{% url 'update_item' i.id %}">
+                                {% if i.item_pic %}
+                                    <img src="{{ i.item_pic.url }}" alt="{{ i.name }}">
+                                {% else %}
+                                    <img src="{% static 'inventory/images/default-item.jpg' %}" alt="Default Image">
+                                {% endif %}
+                            </a>
+                            <div class="card-content">
+                                <h2 class="card-title">{{ i.name }}</h2>
+                                {% if i.expiry_date %}
+                                    <p class="expiry-date">Expiry Date: {{ i.expiry_date }}</p>
+                                {% else %}
+                                    <p class="expiry-date">No expiry date specified</p>
+                                {% endif %}
+                                <p class="quantity">Quantity: {{ i.quantity }}</p>
+                                <div class="action-buttons">
+                                    <a href="{% url 'delete_item' i.id %}" class="delete-btn">DELETE</a>
+                                    <a href="{% url 'update_item' i.id %}" class="update-btn">UPDATE</a>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            {% endfor %}
+                {% endfor %}
+            </div>
         </div>
-    </div>
-</body>
+    </body>
 
-{% endblock content%}
+    {% endblock content%}

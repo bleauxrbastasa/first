@@ -122,3 +122,8 @@ from inventory.models import inventoryItem  # Import the inventoryItem model fro
 def customer_dashboard(request):
     items = inventoryItem.objects.all()  # Fetch all inventory items
     return render(request, 'customerDashboard.html', {'items': items})
+
+
+def cart_view(request):
+    # Your cart handling logic here
+    return render(request, 'cart.html')  # Update with your actual cart template

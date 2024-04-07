@@ -1,15 +1,42 @@
+{% load static %}
+
 <nav class="navbar navbar-dark bg-dark">
     <div class="container d-flex justify-content-between">
        
         <div class="d-flex align-items-center">
             <a href="{% url 'customer_home' %}" class="navbar-brand">Belbros Foodhub</a>
             <a href="{% url 'orders' %}" class="nav-link me-2">Your Orders</a>
-            <a href="{% url 'payment_options' %}" class="nav-link me-2">Payment Settings</a>
+            {% comment %} <a href="{% url 'payment_options' %}" class="nav-link me-2">Payment Settings</a> {% endcomment %}
             <a href="{% url 'delivery_settings' %}" class="nav-link me-2">Delivery Settings</a>
             <a href="{% url 'support_messages' %}" class="nav-link me-2"> Messages</a>
             <a href="{% url 'about' %}" class="nav-link me-2">About</a>
             <a href="{% url 'logout' %}" class="nav-link btn btn-outline-light btn-sm">Logout</a>
             <input type="text" id="searchInput" placeholder="Search products...">
+
+        <!-- Right-aligned Cart Button Container -->
+        <div class="cart-icon-container">
+            <a id="cartButton" class="nav-link">
+                <img src="{% static 'customer/shopping-cart-48.png' %}" alt="Cart">
+                <span id="cartCount">0</span>
+            </a>
+        </div>
+
+
+            <!-- Cart Popup (initially hidden) -->
+            <div id="cartPopup" class="cart-popup" style="display: none;">
+                <h5>Cart Items</h5>
+                <div id="cartItems"></div>
+                <div class="text-end">
+                    <button class="btn btn-secondary">Checkout</button>
+                </div>
+            </div>
+        </div>
+
+
+       
+
+
+
         </div>
     </div>
 </nav>

@@ -387,3 +387,50 @@ body {
 }
 
 /* If you have action buttons within your cards, add styles here */
+
+
+
+.cart-popup {
+    position: absolute;
+    right: 0;
+    background: white;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 10px;
+    width: 300px; /* Adjust as needed */
+    z-index: 10;
+}
+
+.cart-item {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 5px;
+}
+
+.cart-item input[type="number"] {
+    width: 50px;
+}
+
+.cart-popup {
+    /* Existing styles */
+    color: black; /* Set text color to black */
+}
+
+.cart-item {
+    /* Existing styles */
+    align-items: center; /* Ensure items are vertically aligned */
+}
+
+.cart-item label, .cart-item span {
+    margin-right: 10px; /* Add some spacing */
+}
+
+.quantity-input {
+    width: 50px; /* Width of the quantity input field */
+    margin-right: 10px; /* Spacing between the input field and any following content */
+    text-align: center; /* Center the quantity number */
+}
+
+.cart-icon-container {
+    margin-left: auto;
+}

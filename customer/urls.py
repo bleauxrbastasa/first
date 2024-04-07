@@ -22,5 +22,5 @@ urlpatterns = [
      path('delivery-settings/', views.delivery_settings, name='delivery_settings'),
     path('set-delivery-options/', views.set_delivery_options, name='set_delivery_options'),
     path('dashboard/', views.customer_dashboard, name='customer_dashboard'),
-    
+      path('cart/', views.cart_view, name='cart'),  # Adding the URL pattern for the cart
 ]
