@@ -1,6 +1,14 @@
 from django.shortcuts import render, redirect
 from django.views.decorators.http import require_POST
-
+from django.shortcuts import render, redirect
+from django.views.decorators.http import require_POST
+from django.contrib import messages
+from .models import User
+from .models import Product
+from django.contrib.auth import authenticate, login
+from django.contrib.auth.hashers import check_password 
+from django.http import HttpResponseRedirect
+from django.contrib.auth.models import User as DjangoUser
 from .models import Product
 
 def customer_home(request):
@@ -8,16 +16,55 @@ def customer_home(request):
     return render(request, 'customer_home.html')
 
 def customer_login(request):
-    # View for the login page
+    if request.method == 'POST':
+        email = request.POST.get('email')
+        password = request.POST.get('password')
+
+        print("Entered Email:", email)  # Debugging output
+        print("Entered Password:", password)  # Debugging output
+
+      
+        user = User.objects.filter(email=email).first()
+
+        print("Database Email:", user.email if user else None)  # Debugging output
+        print("Database Password:", user.password if user else None)  # Debugging output
+
+      
+        if user.email == email and user.password == password:
+           return redirect('customer_dashboard')
+
     return render(request, 'customerLogin.html')
 
+
 def customer_signup(request):
-    # View for the signup page
+    if request.method == 'POST':
+        name = request.POST.get('name')
+        email = request.POST.get('email')
+        password = request.POST.get('password')
+        confirm_password = request.POST.get('confirmPassword')
+
+        if password != confirm_password:
+            return render(request, 'customerSignUp.html', {'error': 'Passwords do not match'})
+
+        if User.objects.filter(name=name).exists():
+            messages.error(request, 'Name already in use. Please try again.')
+            return redirect('customer_signup')
+        elif User.objects.filter(email=email).exists():
+            messages.error(request, 'Email already in use. Please try again.')
+            return redirect('customer_signup')
+        else:
+            new_user = User(name=name, email=email, password=password)
+            new_user.save()
+            
+            messages.success(request, 'Registration successful. Please login.')  
+
+            return redirect('customer_login')
+
     return render(request, 'customerSignUp.html')
 
 def customer_dashboard(request):
-    # Dashboard view where authenticated users can access their info
-    return render(request, 'customerDashboard.html')
+    user = request.user
+    return render(request, 'customerDashboard.html', {'user': user})
 
 def customer_about(request):
     # Logic for the "About" page can be added here
@@ -43,6 +90,9 @@ def support_messages(request):
     # Logic for displaying support messages
     return render(request, 'customerMessages.html')  # Ensure you have this template
 
+def view_users(request):
+    users = User.objects.all()  
+    return render(request, 'view_users.html', {'users': users})
 
 
 
