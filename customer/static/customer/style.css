@@ -5,7 +5,7 @@
     padding: 40px;
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    width: 100%;
+    width: 50%;
     max-width: 400px;
     text-align: center;
     align-content: center;
@@ -13,7 +13,7 @@
 
 .login-container h1 {
     color: #000000;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
 }
 
 .input-group {
@@ -339,3 +339,51 @@ body {
 .message p {
     margin-bottom: 5px;
 }
+
+
+
+
+
+/* DASHBOARD CSS */
+
+/* Enhances Bootstrap card styling for product display */
+.card.mb-4.shadow-sm {
+    border-radius: 10px; /* Rounded corners for the card */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+    transition: transform 0.3s ease-in-out; /* Smooth transition for hover effect */
+}
+
+.card.mb-4.shadow-sm:hover {
+    transform: translateY(-5px); /* Slight lift effect on hover */
+}
+
+.card-img-top {
+    width: 100%;
+    height: 200px; /* Fixed height for image consistency */
+    object-fit: cover; /* Ensures images cover the area, might crop */
+    border-top-left-radius: 10px; /* Rounded corners for the image, top left */
+    border-top-right-radius: 10px; /* Rounded corners for the image, top right */
+}
+
+.card-body {
+    padding: 20px; /* Spacing inside the card */
+}
+
+.card-title {
+    font-size: 20px; /* Larger title for emphasis */
+    color: #333; /* Darker text for better readability */
+}
+
+.card-text {
+    margin-top: 10px; /* Space between title and text */
+    font-size: 14px; /* Adjusted for readability */
+    color: #666; /* Lighter text color */
+}
+
+/* Styling for the quantity and expiry date at the bottom of the card */
+.d-flex.justify-content-between.align-items-center {
+    font-size: 14px; /* Smaller font size for metadata */
+    color: #666; /* Lighter color for subtlety */
+}
+
+/* If you have action buttons within your cards, add styles here */

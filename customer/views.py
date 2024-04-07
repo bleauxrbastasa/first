@@ -111,3 +111,14 @@ def send_message(request):
     else:
         # Handle the case where the message is empty or invalid
         return HttpResponse('Invalid message content', status=400)
+
+
+
+# customer/views.py
+
+from django.shortcuts import render
+from inventory.models import inventoryItem  # Import the inventoryItem model from the inventory app
+
+def customer_dashboard(request):
+    items = inventoryItem.objects.all()  # Fetch all inventory items
+    return render(request, 'customerDashboard.html', {'items': items})
