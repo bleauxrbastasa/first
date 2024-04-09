@@ -1,12 +1,7 @@
-from . import views
 from django.urls import path
+from . import views
 
 urlpatterns = [
-    path('', views.home, name="dashboard"),
-    path('dashboard/', views.home, name="dashboard"),
-    path('inventory/', views.inventory, name='inventory'),
-    path('customer/', views.customer, name='customer'),
-    path('create_item/', views.createItem, name='create_item'),
-    path('update_item/<str:pk>/', views.updateItem, name='update_item'),
-    path('delete_item/<str:pk>/', views.deleteItem, name='delete_item'),
+    path('add/', views.add_food, name='add_product'),
+    path('', views.food_list, name='product_list'),
 ]

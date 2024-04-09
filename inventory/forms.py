@@ -1,7 +1,7 @@
-from django.forms import ModelForm
-from .models import *
+from django import forms
+from .models import Food
 
-class itemForm(ModelForm):
-	class Meta:
-		model = inventoryItem
-		fields = '__all__'
+class FoodForm(forms.ModelForm):
+    class Meta:
+        model = Food
+        fields = ['name', 'quantity', 'food_type', 'image']
