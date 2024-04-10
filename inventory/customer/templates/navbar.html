@@ -1,0 +1,62 @@
+{% load static %}
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Belbros Foodhub</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.1.3/css/bootstrap.min.css" integrity="sha384-Qt9Hug5NfnQDGMoaQYXN1+PiQvda7poO7/6kE1ZhyGhL7t4zL7q6HISO8ilMom8u" crossorigin="anonymous">
+    <link rel="stylesheet" href="{% static 'customer/style.css' %}">
+
+    
+<nav class="navbar navbar-dark bg-dark">
+    <div class="container d-flex justify-content-between">
+       
+        <div class="d-flex align-items-center">
+            <a href="{% url 'customer_home' %}" class="navbar-brand">Belbros Foodhub</a>
+            <a href="{% url 'orders' %}" class="nav-link me-2">Your Orders</a>
+            {% comment %} <a href="{% url 'payment_options' %}" class="nav-link me-2">Payment Settings</a> {% endcomment %}
+            <a href="{% url 'delivery_settings' %}" class="nav-link me-2">Delivery Settings</a>
+            <a href="{% url 'support_messages' %}" class="nav-link me-2"> Messages</a>
+            <a href="{% url 'about' %}" class="nav-link me-2">About</a>
+            <a href="{% url 'logout' %}" class="nav-link btn btn-outline-light btn-sm">Logout</a>
+            <input type="text" id="searchInput" placeholder="Search products...">
+
+                                <!-- Cart Button -->
+                                <a id="cartButton" class="nav-link position-relative" href="javascript:void(0);" style="width: 48px; height: 48px;">
+                                    <img src="{% static 'customer/shopping-cart-48.png' %}" alt="Cart" style="width: 48px; height: 48px;">
+                                    <span id="cartCount" class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">0</span>
+                                </a>
+                            </form>
+                        </div>
+                    </div>
+      
+        </div>
+
+                            <!-- Cart Popup -->
+                            <div id="cartPopup" class="cart-popup" style="display:none;">
+                                <h5>Cart Items</h5>
+                                <div id="cartItems"></div>
+                                <div class="payment-mode my-3">
+                                    <h6>Payment Mode</h6>
+                                    <select class="form-select" aria-label="Payment Mode">
+                                        <option selected value="cash_on_delivery">Cash on Delivery</option>
+                                    </select>
+                                </div>
+                                <div class="text-end">
+                                    <button class="btn btn-secondary">Checkout</button>
+                                </div>
+                            </div>
+
+
+       
+
+
+
+        </div>
+    </div>
+</nav>
