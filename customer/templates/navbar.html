@@ -1,0 +1,15 @@
+<nav class="navbar navbar-dark bg-dark">
+    <div class="container d-flex justify-content-between">
+       
+        <div class="d-flex align-items-center">
+            <a href="{% url 'customer_home' %}" class="navbar-brand">Belbros Foodhub</a>
+            <a href="{% url 'orders' %}" class="nav-link me-2">Your Orders</a>
+            <a href="{% url 'payment_options' %}" class="nav-link me-2">Payment Settings</a>
+            <a href="{% url 'delivery_settings' %}" class="nav-link me-2">Delivery Settings</a>
+            <a href="{% url 'support_messages' %}" class="nav-link me-2"> Messages</a>
+            <a href="{% url 'about' %}" class="nav-link me-2">About</a>
+            <a href="{% url 'logout' %}" class="nav-link btn btn-outline-light btn-sm">Logout</a>
+            <input type="text" id="searchInput" placeholder="Search products...">
+        </div>
+    </div>
+</nav>

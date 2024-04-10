@@ -1,0 +1,33 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - Belbros Foodhub</title>
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+</head>
+<body>
+    {% include 'navbaralt.html' %}
+    <div class="about-container">
+        <h1>About Belbros Foodhub</h1>
+        <img src="{% static 'images/foodhub.jpg' %}" alt="Belbros Foodhub" class="about-image">
+        <p>Welcome to Belbros Foodhub, your premier destination for delightful culinary experiences. Located at Stall #15 in the bustling Padre Garcia Commercial Complex, we are proud to be an authorized distributor of renowned brands like Siomai King, Siopao Da King, Potato King, Boy Bondat, and Mang Boks.</p>
+
+        <h2>Our Mission</h2>
+        <p>At Belbros Foodhub, our mission is to bring you the finest selections from your favorite food franchises. We are dedicated to ensuring freshness, quality, and satisfaction in every bite. Our journey begins with careful selection and ends with the delight of our customers, making every meal a memorable one.</p>
+
+        <h2>Our Process</h2>
+        <p>Our business thrives on efficiency and quality. From our meticulous Purchase to Pay Cycle, utilizing the JC Premiere Portal system for product procurement, to our streamlined Order to Cash Cycle for both online and walk-in customers, we ensure every aspect of our operations contributes to an exceptional customer experience.</p>
+
+        <h2>Our Commitment</h2>
+        <p>We understand the importance of inventory management and the value of a proactive online presence. With our focus on the First-In First-Out (FIFO) method and our drive towards an innovative e-commerce platform, we aim to elevate your dining experience by making our delectable offerings more accessible than ever.</p>
+
+        <h2>Join Us</h2>
+        <p>Step into the world of Belbros Foodhub and discover a haven of flavors waiting to be explored. Whether you're here for a quick snack or stocking up on your favorites, we are here to serve you with a smile. Experience the best of Padre Garcia's culinary offerings with us today.</p>
+    </div>
+
+    <script src="{% static 'customer/script.js' %}"></script>
+</body>
+</html>
