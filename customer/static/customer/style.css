@@ -125,7 +125,7 @@ body {
 
 /* Ensuring the navbar has the right color */
 body .navbar {
-    background-color: #731436 !important; /* Deep red color, ensure it applies with !important */
+    background-color: #000000 !important; /* Deep red color, ensure it applies with !important */
     color: white;
 }
 

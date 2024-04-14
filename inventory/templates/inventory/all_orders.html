@@ -4,106 +4,29 @@
 {% block content %}
 <style>
 
-    body {
-        font-family: Arial, sans-serif;
-        background-color: #f0f0f0;
-        margin: 0;
-        padding: 0;
-    }
-    .floating-btn{
-        width: 80px;
-        height: 80px;
-        background: #731436;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        text-decoration: none;
-        border-radius: 50%;
-        color: white;
-        font-size: 60px;
-        box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.5);
-        position: fixed;
-        right: 20px;
-        bottom: 20px;
-        z-index: 5;
-        transition: background 0.25s;
-        border: none;
-        cursor: pointer;
-    }
-    .floating-btn:hover {
-        background: #621436;
-        color: white;
-    }
-
-    .container {
-        margin-top: 10px;
-        max-width: 800px;
-        padding: 20px;
-        background-color: #fff;
-        border-radius: 10px; 
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); 
-    }
-
-    .table {
-        width: 100%;
-        border-collapse: collapse;
-        margin-top: 20px;
-    }
-
-    .table th, .table td {
-        padding: 8px;
-        text-align: left;
-        border-bottom: 1px solid #ddd;
-    }
-
-    .table th {
-        background-color: #f2f2f2;
-    }
-
-    .btn-danger {
-        background-color: #dc3545;
-        border-color: #dc3545;
-        color: #fff;
-        padding: 6px 12px;
-        border-radius: 4px;
-        cursor: pointer;
-    }
-
-    .btn-danger:hover {
-        background-color: #c82333;
-        border-color: #bd2130;
-    }
 </style>
 
-<div class="container">
-    <h1>Orders</h1>
-
-    <a href="{% url 'add_order'%}" class="floating-btn">+</a>
-
-    <table class="table">
-        <thead>
+<div class="container mt-4">
+    <h2>Order List</h2>
+    <table class="table table-striped">
+        <thead class="table-dark">
             <tr>
-                <th scope="col">Tracking ID</th>
-                <th scope="col">Name</th>
-                <th scope="col">Product</th>
-                <th scope="col">Quantity</th>
-                <th scope="col">Address</th>
-                <th scope="col">Actions</th>
+                <th>Name</th>
+                <th>Price</th>
+                <th>Quantity</th>
+                <th>Actions</th>
             </tr>
         </thead>
         <tbody>
             {% for order in orders %}
             <tr>
-                <td>{{ order.tracking_id }}</td>
                 <td>{{ order.name }}</td>
-                <td>{{ order.product }}</td>
+                <td>${{ order.price }}</td>
                 <td>{{ order.quantity }}</td>
-                <td>{{ order.address }}</td>
                 <td>
-                    <form action="{% url 'delete_order' order.id %}" method="post">
-                        {% csrf_token %}
-                        <button type="submit" class="btn btn-danger">Delete</button>
-                    </form>
+                    <button class="btn btn-danger btn-sm" onclick="deleteOrder('{{ order.id }}')">Delete</button>
+                    <button class="btn btn-primary btn-sm" onclick="editOrder('{{ order.id }}')">Edit</button>
+                    <button class="btn btn-success btn-sm" onclick="completeOrder('{{ order.id }}')">Complete</button>
                 </td>
             </tr>
             {% endfor %}

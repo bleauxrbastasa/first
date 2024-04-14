@@ -9,9 +9,6 @@
 
 <nav class="navbar">
     <div class="container d-flex justify-content-between">
-
-
-        
        
         <div class="d-flex align-items-center">
             <a href="{% url 'customer:customer_home' %}" class="navbar-brand">Belbros Foodhub</a>
@@ -49,12 +46,6 @@
                 <button id="checkoutButton" class="btn btn-secondary">Checkout</button>
             </div>
         </div>
-
-
-       
-
-
-
         </div>
     </div>
 </nav>
@@ -62,40 +53,38 @@
 <script>
     console.log("script.js is loaded and running");
 
-// AJAX
-headers: {
-    'Content-Type'; 'application/json',
-    'X-CSRFToken'; getCookie('csrftoken')  // Call directly here
-}
+    // AJAX
+    headers: {
+        'Content-Type'; 'application/json',
+        'X-CSRFToken'; getCookie('csrftoken')  // Call directly here
+    }
 
-document.getElementById('checkoutButton').addEventListener('click', function() {
+    document.getElementById('checkoutButton').addEventListener('click', function() {
 
-    console.log(cart)
-    
-    const cartData = {
-        cartItems: Object.values(cart)
-    };
+        console.log(cart)
+        
+        const cartData = {
+            cartItems: Object.values(cart)
+        };
 
-    fetch('/customer/save-cart/', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-            'X-CSRFToken': getCookie('csrftoken')
-        },
-        body: JSON.stringify(cartData)
-    })
-    .then(response => response.json())
-    .then(data => {
-        console.log('Success:', data);
-        alert("Checkout successful!");
-    })
-    .catch(error => {
-        console.error('Error:', error);
-        alert("Checkout failed: " + error.message);
+        fetch('/customer/save-cart/', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRFToken': getCookie('csrftoken')
+            },
+            body: JSON.stringify(cartData)
+        })
+        .then(response => response.json())
+        .then(data => {
+            console.log('Success:', data);
+            alert("Checkout successful!");
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            alert("Checkout failed: " + error.message);
+        });
     });
-});
-
-
     
     function getCookie(name) {
         let cookieValue = null;
@@ -112,8 +101,5 @@ document.getElementById('checkoutButton').addEventListener('click', function() {
         return cookieValue;
     }
     
-
-
-
 </script>
 

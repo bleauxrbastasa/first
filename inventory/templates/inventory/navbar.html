@@ -1,4 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Inventory</title>
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">	
+</head>
+
+
 {% with url_name=request.resolver_match.url_name %}
+{% load static %}
 
 <nav class="navbar navbar-expand-lg navbar-dark py-3" style="background-color: #000000;">
   <a class="navbar-brand" href="#"><h1>Belbros Foodhub</h1></a>
@@ -31,3 +42,22 @@
 </nav>
 
 {% endwith %}
+
+
+<script>
+  function deleteOrder(id) {
+      console.log("Delete order", id);
+      // Implement the delete functionality here, possibly using fetch() for an AJAX call
+  }
+  
+  function editOrder(id) {
+      console.log("Edit order", id);
+      // Open a modal or redirect to an edit page
+  }
+  
+  function completeOrder(id) {
+      console.log("Complete order", id);
+      // Implement the mark as complete functionality
+  }
+  </script>
+  

@@ -1,4 +1,5 @@
 {% extends 'inventory/main.html' %}
+
 {% load static %}
 	
 {% block content %}
@@ -111,7 +112,7 @@
         </div>
 
 		<div class="btn col-sm-12 col-md-12 col-lg-6">
-            <a href="{% url 'all_orders' %}">
+            <a href="{% url 'new_order' %}">
                 <div class="card inventory-card flex-row align-items-center text-left" style="gap: 40px;">
                     <img class="dashboard-header-img" src="{% static 'inventory/images/order.png' %}"/>
                     <div class="dashboard-label">

@@ -125,3 +125,10 @@ def delete_order(request, order_id):
         order = Order.objects.get(id=order_id)
         order.delete()
     return redirect('all_orders')
+
+
+from customer.models import CartItem
+def new_order(request):
+    orders = CartItem.objects.all()
+    return render(request, 'inventory/new_orders.html', {'orders': orders})
+	
