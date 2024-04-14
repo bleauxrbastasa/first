@@ -2,19 +2,61 @@
 {% load static %}
 {% block content %}
 
-<div class="row">
-	<div class="col-6">
-		<div class="card card-body">
-			<p>Are you sure you want to delete "{{item}}"?</p>
+<style>
+    .confirmation-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+    }
 
-			<form action="{% url 'delete_item' item.id %}" method="POST">
+    .confirmation-card {
+        max-width: 400px;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        background-color: #fff;
+    }
 
-				{% csrf_token %}
-				<a class="btn btn-warning" href="{% url 'inventory'%}">Cancel</a>
-				<input class="btn btn-danger" type="submit" name="Confirm">
-			</form>
-		</div>
-	</div>
+    .confirmation-card p {
+        margin-bottom: 20px;
+        font-size: 18px;
+        color: #333;
+    }
+
+    .confirmation-card .btn {
+        margin-right: 10px;
+    }
+
+    .confirmation-card .btn:last-child {
+        margin-right: 0;
+    }
+
+    .confirmation-card .btn-warning {
+        background-color: #ffc107;
+        color: #333;
+    }
+
+    .confirmation-card .btn-danger {
+        background-color: #dc3545;
+        color: #fff;
+    }
+
+    .confirmation-card .btn:hover {
+        opacity: 0.8;
+    }
+</style>
+
+<div class="confirmation-container">
+    <div class="confirmation-card">
+        <p>Are you sure you want to delete "{{ item }}"?</p>
+
+        <form action="{% url 'delete_item' item.id %}" method="POST">
+            {% csrf_token %}
+            <a class="btn btn-warning" href="{% url 'inventory' %}">Cancel</a>
+            <input class="btn btn-danger" type="submit" value="Confirm">
+        </form>
+    </div>
 </div>
 
 {% endblock content %}

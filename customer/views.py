@@ -1,26 +1,74 @@
 from django.shortcuts import render, redirect
 from django.views.decorators.http import require_POST
-
+from django.shortcuts import render, redirect
+from django.views.decorators.http import require_POST
+from django.contrib import messages
+from .models import User
 from .models import Product
-
-def customer_home(request):
-    # Home page view, possibly a landing page or product listing
-    return render(request, 'customer_home.html')
+from django.contrib.auth import authenticate, login
+from django.contrib.auth.hashers import check_password 
+from django.http import HttpResponseRedirect
+from django.contrib.auth.models import User as DjangoUser
+from .models import Product
+from django.shortcuts import render
+from inventory.models import inventoryItem
+from django.shortcuts import redirect
+from django.http import HttpResponse
+from django.views.decorators.http import require_POST
 
 def customer_login(request):
-    # View for the login page
+    if request.method == 'POST':
+        email = request.POST.get('email')
+        password = request.POST.get('password')
+
+        print("Entered Email:", email)  # Debugging output
+        print("Entered Password:", password)  # Debugging output
+
+      
+        user = User.objects.filter(email=email).first()
+
+        print("Database Email:", user.email if user else None)  # Debugging output
+        print("Database Password:", user.password if user else None)  # Debugging output
+
+      
+        if user.email == email and user.password == password:
+           return redirect('customer:customer_dashboard')
+
     return render(request, 'customerLogin.html')
 
+
 def customer_signup(request):
-    # View for the signup page
+    if request.method == 'POST':
+        name = request.POST.get('name')
+        email = request.POST.get('email')
+        password = request.POST.get('password')
+        confirm_password = request.POST.get('confirmPassword')
+
+        if password != confirm_password:
+            return render(request, 'customerSignUp.html', {'error': 'Passwords do not match'})
+
+        if User.objects.filter(name=name).exists():
+            messages.error(request, 'Name already in use. Please try again.')
+            return redirect('customer_signup')
+        elif User.objects.filter(email=email).exists():
+            messages.error(request, 'Email already in use. Please try again.')
+            return redirect('customer_signup')
+        else:
+            new_user = User(name=name, email=email, password=password)
+            new_user.save()
+            
+            messages.success(request, 'Registration successful. Please login.')  
+
+            return redirect('customer:customer_login')
+
     return render(request, 'customerSignUp.html')
 
 def customer_dashboard(request):
-    # Dashboard view where authenticated users can access their info
-    return render(request, 'customerDashboard.html')
+    items = inventoryItem.objects.all()  # Fetch all inventory items
+    return render(request, 'customerDashboard.html', {'items': items})
 
 def customer_about(request):
-    # Logic for the "About" page can be added here
+    
     return render(request, 'customerAbout.html')  # Point to the correct template
 
 def view_products(request):
@@ -43,6 +91,9 @@ def support_messages(request):
     # Logic for displaying support messages
     return render(request, 'customerMessages.html')  # Ensure you have this template
 
+def view_users(request):
+    users = User.objects.all()  
+    return render(request, 'view_users.html', {'users': users})
 
 
 
@@ -66,9 +117,7 @@ def set_delivery_options(request):
 
 
 
-from django.shortcuts import redirect
-from django.http import HttpResponse
-from django.views.decorators.http import require_POST
+
 
 # Import any necessary models or utilities
 
@@ -111,3 +160,42 @@ def send_message(request):
     else:
         # Handle the case where the message is empty or invalid
         return HttpResponse('Invalid message content', status=400)
+
+
+
+# customer/views.py
+
+from django.http import JsonResponse
+import json
+from django.views.decorators.csrf import csrf_exempt
+from .models import CartItem
+
+
+
+@csrf_exempt
+def save_cart(request):
+    if request.method == 'POST':
+        data = json.loads(request.body)
+        items_saved = []
+        for item in data.get('cartItems', []):
+            name = item.get('name')
+            price = item.get('price')  # No need to check if it's None; the model allows null
+            quantity = item.get('quantity', 1)  # Default to 1 if quantity is missing
+
+            cart_item = CartItem.objects.create(name=name, price=price, quantity=quantity)
+            items_saved.append(cart_item.name)
+
+        return JsonResponse({'message': f"Cart saved successfully! Items saved: {items_saved}"}, status=200)
+
+    return JsonResponse({'error': 'Invalid request'}, status=400)
+
+
+
+def customer_home(request):
+    # Home page view, possibly a landing page or product listing
+    items = inventoryItem.objects.all()  # Retrieve all products from the database
+    return render(request, 'customer_home.html', {'items': items})
+
+def cart_view(request):
+    # Your cart handling logic here
+    return render(request, 'cart.html')  # Update with your actual cart template

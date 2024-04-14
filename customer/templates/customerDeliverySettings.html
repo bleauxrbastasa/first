@@ -6,14 +6,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Delivery Options - Cakeaholic</title>
-    <link rel="stylesheet" href="{% static 'style.css' %}">
+    <link rel="stylesheet" href="{% static 'customer/style.css' %}">
+    <script src="{% static 'customer/script.js' %}" defer></script>
 </head>
 <body>
     {% include 'navbar.html' %}
 
     <div class="container delivery-options-form mt-5">
         <h1>Delivery Options</h1>
-        <form action="{% url 'set_delivery_options' %}" method="POST">
+        <form action="{% url 'customer:set_delivery_options' %}" method="POST">
             {% csrf_token %}
             <div class="input-group mb-3">
                 <label for="address">Delivery Address</label>

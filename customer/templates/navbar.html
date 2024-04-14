@@ -1,15 +1,119 @@
-<nav class="navbar navbar-dark bg-dark">
+{% load static %}
+
+<script type="text/javascript">
+    var csrftoken = '{{ csrf_token }}';
+    
+</script>
+
+
+
+<nav class="navbar">
     <div class="container d-flex justify-content-between">
+
+
+        
        
         <div class="d-flex align-items-center">
-            <a href="{% url 'customer_home' %}" class="navbar-brand">Bel Bros Food Hub</a>
-            <a href="{% url 'orders' %}" class="nav-link me-2">Your Orders</a>
-            <a href="{% url 'payment_options' %}" class="nav-link me-2">Payment Settings</a>
-            <a href="{% url 'delivery_settings' %}" class="nav-link me-2">Delivery Settings</a>
-            <a href="{% url 'support_messages' %}" class="nav-link me-2"> Messages</a>
-            <a href="{% url 'about' %}" class="nav-link me-2">About</a>
-            <a href="{% url 'logout' %}" class="nav-link btn btn-outline-light btn-sm">Logout</a>
+            <a href="{% url 'customer:customer_home' %}" class="navbar-brand">Belbros Foodhub</a>
+            <a href="{% url 'customer:orders' %}" class="nav-link me-2">Your Orders</a>
+            {% comment %} <a href="{% url 'payment_options' %}" class="nav-link me-2">Payment Settings</a> {% endcomment %}
+            <a href="{% url 'customer:delivery_settings' %}" class="nav-link me-2">Delivery Settings</a>
+            <a href="{% url 'customer:support_messages' %}" class="nav-link me-2"> Messages</a>
+            <a href="{% url 'customer:about' %}" class="nav-link me-2">About</a>
+            <a href="{% url 'customer:logout' %}" class="nav-link btn btn-outline-light btn-sm">Logout</a>
             <input type="text" id="searchInput" placeholder="Search products...">
+
+                                <!-- Cart Button -->
+                                <a id="cartButton" class="nav-link position-relative" href="javascript:void(0);" style="width: 48px; height: 48px;">
+                                    <img src="{% static 'customer/shopping-cart-48.png' %}" alt="Cart" style="width: 48px; height: 48px;">
+                                    <span id="cartCount" class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">0</span>
+                                </a>
+                            </form>
+                        </div>
+                    </div>
+      
+        </div>
+
+        <!-- Cart Popup -->
+        <div id="cartPopup" class="cart-popup" style="display:none;">
+            <h5>Cart Items</h5>
+            <div id="cartItems"></div>
+
+            <div class="payment-mode my-3">
+                <h6>Payment Mode</h6>
+                <select class="form-select" aria-label="Payment Mode">
+                    <option selected value="cash_on_delivery">Cash on Delivery</option>
+                </select>
+            </div>
+            <div class="text-end">
+                <button id="checkoutButton" class="btn btn-secondary">Checkout</button>
+            </div>
+        </div>
+
+
+       
+
+
+
         </div>
     </div>
 </nav>
+
+<script>
+    console.log("script.js is loaded and running");
+
+// AJAX
+headers: {
+    'Content-Type'; 'application/json',
+    'X-CSRFToken'; getCookie('csrftoken')  // Call directly here
+}
+
+document.getElementById('checkoutButton').addEventListener('click', function() {
+
+    console.log(cart)
+    
+    const cartData = {
+        cartItems: Object.values(cart)
+    };
+
+    fetch('/customer/save-cart/', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-CSRFToken': getCookie('csrftoken')
+        },
+        body: JSON.stringify(cartData)
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log('Success:', data);
+        alert("Checkout successful!");
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        alert("Checkout failed: " + error.message);
+    });
+});
+
+
+    
+    function getCookie(name) {
+        let cookieValue = null;
+        if (document.cookie && document.cookie !== '') {
+            const cookies = document.cookie.split(';');
+            for (let i = 0; i < cookies.length; i++) {
+                const cookie = cookies[i].trim();
+                if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                    cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                    break;
+                }
+            }
+        }
+        return cookieValue;
+    }
+    
+
+
+
+</script>
+

@@ -1,7 +1,9 @@
 from django.db import models
 from django.conf import settings
 
-# Create your models here.
+from django.contrib.auth.models import AbstractUser
+
+
 
 class Product(models.Model):
     name = models.CharField(max_length=255)
@@ -21,3 +23,24 @@ class Message(models.Model):
 
     def __str__(self):
         return f'Message from {self.sender} to {self.recipient} on {self.date_sent}'
+
+
+
+class User(models.Model):
+    name = models.CharField(max_length=100)
+    email = models.EmailField(unique=True)
+    password = models.CharField(max_length=100)
+
+
+    def __str__(self):
+        return self.name
+
+
+class CartItem(models.Model):
+    name = models.CharField(max_length=255)
+    price = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True)
+    quantity = models.IntegerField()
+
+    def __str__(self):
+        return f"{self.name} ({self.quantity})"
+

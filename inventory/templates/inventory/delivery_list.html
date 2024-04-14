@@ -1,0 +1,132 @@
+{% extends 'inventory/main.html' %}
+
+{% block content %}
+<div class="expiry-container">
+    <h1>Scheduled Deliveries</h1>
+    <a href="{% url 'add_scheduled_delivery'%}" class="floating-btn">+</a>
+    <div class="expiry-item">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">Tracking ID</th>
+                    <th scope="col">Delivery Status</th>
+                    <th scope="col">Payment Type</th>
+                    <th scope="col">Update Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for delivery in deliveries %}
+                <tr class="{% if delivery.delivery_status == 'Delivered' %}delivered{% elif delivery.delivery_status == 'In Transit' %}in-transit{% elif delivery.delivery_status == 'Canceled' %}canceled{% endif %}">
+                    <td>{{ delivery.tracking_id }}</td>
+                    <td>{{ delivery.get_delivery_status_display }}</td>
+                    <td>{{ delivery.get_payment_type_display }}</td>
+                    <td>
+                        <form method="post" action="{% url 'update_delivery_status' %}">
+                            {% csrf_token %}
+                            <input type="hidden" name="delivery_id" value="{{ delivery.id }}">
+                            <select name="delivery_status" class="form-select">
+                                <option value="In Transit" {% if delivery.delivery_status == 'In Transit' %}selected{% endif %}>In Transit</option>
+                                <option value="Delivered" {% if delivery.delivery_status == 'Delivered' %}selected{% endif %}>Delivered</option>
+                                <option value="Canceled" {% if delivery.delivery_status == 'Canceled' %}selected{% endif %}>Canceled</option>
+                            </select>
+                            <button type="submit" class="btn btn-primary">Update</button>
+                        </form>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f0f0f0;
+        margin: 0;
+        padding: 0;
+    }
+
+    .floating-btn{
+        width: 80px;
+        height: 80px;
+        background: #731436;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-decoration: none;
+        border-radius: 50%;
+        color: white;
+        font-size: 60px;
+        box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.5);
+        position: fixed;
+        right: 20px;
+        bottom: 20px;
+        z-index: 5;
+        transition: background 0.25s;
+        border: none;
+        cursor: pointer;
+    }
+    .floating-btn:hover {
+        background: #621436;
+        color: white;
+    }
+
+    .expiry-container {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 20px;
+    }
+
+    .expiry-item {
+        background-color: #fff;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        padding: 20px;
+        margin-bottom: 20px;
+    }
+
+    .expiry-item h1 {
+        font-size: 24px;
+        color: #333;
+        margin-top: 0;
+        margin-bottom: 20px;
+    }
+
+    .expiry-item .table {
+        width: 100%;
+    }
+
+    .expiry-item .table th,
+    .expiry-item .table td {
+        padding: 12px;
+        vertical-align: top;
+        border-top: 1px solid #dee2e6;
+    }
+
+    .expiry-item .table th {
+        border-top: none;
+    }
+
+    .expiry-item .table .delivered {
+        background-color: #c8e6c9;
+    }
+
+    .expiry-item .table .in-transit {
+        background-color: #ffcc80;
+    }
+
+    .expiry-item .table .canceled {
+        background-color: #ffcdd2;
+    }
+
+    .expiry-item .form-select {
+        width: auto;
+        margin-right: 10px;
+    }
+
+    .expiry-item .btn {
+        margin-top: 10px;
+    }
+</style>
+{% endblock %}

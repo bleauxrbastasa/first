@@ -2,6 +2,7 @@ from django.urls import path
 from django.contrib.auth import views as auth_views
 from . import views
 
+app_name = 'customer'
 urlpatterns = [
     path('', views.customer_home, name='customer_home'),
     path('customer_dashboard/', views.customer_dashboard, name='customer_dashboard'),
@@ -15,11 +16,17 @@ urlpatterns = [
     
     
     path('messages/', views.support_messages, name='support_messages'),
-     path('messages/send/', views.send_message, name='send_message'),
+    path('messages/send/', views.send_message, name='send_message'),
     
     
     path('logout/', auth_views.LogoutView.as_view(), name='logout'),
-     path('delivery-settings/', views.delivery_settings, name='delivery_settings'),
+    path('delivery-settings/', views.delivery_settings, name='delivery_settings'),
     path('set-delivery-options/', views.set_delivery_options, name='set_delivery_options'),
+    
+    path('cart/', views.cart_view, name='cart'),  # Adding the URL pattern for the cart
+    path('view_users/', views.view_users, name='view_users'),
+    
+     path('save-cart/', views.save_cart, name='save-cart'),
+    
     
 ]
