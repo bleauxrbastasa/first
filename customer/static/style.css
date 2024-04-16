@@ -1,5 +1,35 @@
 
 
+.navbar {
+    font-family: 'Roboto', sans-serif; /* This specifically targets the navbar */
+}
+
+
+.mt-5{
+    padding-top: 50px;
+}
+@font-face {
+    font-family: 'SF-Pro-Display-Black';
+    src: url('../fonts/SF-Pro-Display-Black.otf') format('opentype');
+    font-weight: bold;
+    font-style: normal;
+}
+
+.navbar-brand {
+ font-family: 'SF-Pro-Display-Black';
+}
+
+.nav-link, .navbar-brand {
+    /* font-family: 'SF-Pro-Display-Black'; */
+    font-weight: 500; /* Adjust weight as necessary */
+    color: #ffffff; /* Adjust color as necessary */
+
+}
+
+.nav-link:hover, .navbar-brand:hover {
+    color: #cccccc; /* Adjust hover color as necessary */
+}
+
 .login-container {
     background-color: #fff;
     padding: 40px;
@@ -95,52 +125,77 @@ a:hover {
 }
 
 
+/* 
 
+@media (max-width: 768px) {
+    .navbar {
+        flex-direction: column;
+    }
+    .product-card {
+        flex-direction: column;
+    }
+} */
 
+body, html {
+    
+    font-family: 'Roboto', sans-serif; /* This applies the font globally */
+}
 
-
-/* DASHBOARD */
 
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-color: #f0f0f0;
     line-height: 1.6;
-    padding-top: 70px; /* Adjust to ensure content doesn't hide under the navbar */
-    
+    /* padding-top: 70px; Adjust to ensure content doesn't hide under the navbar */
 
     display: flex;
-    justify-content: center;
-    align-items: center;
+    flex-direction: column; /* Changed from row to column */
+    justify-content: flex-start; /* Align items from the start vertically */
+    align-items: center; /* Keeps center alignment horizontally */
     min-height: 100vh; /* Use the full height of the viewport */
-    background-color: #f0f0f0;
+   
     padding: 0; /* Remove any default padding */
     margin: 0; /* Remove any default margin */
 }
 
+
+/* Ensuring the navbar has the right color */
+body .navbar {
+    background-color: #731436 !important; /* Deep red color, ensure it applies with !important */
+    color: white;
+}
+
+body .navbar-brand, body .nav-link {
+    color: white !important; /* Ensures text color is white */
+}
+
+body .nav-link:hover, body .logout-button:hover {
+    background-color: #000000 !important; /* Darker color on hover */
+    border-radius: 5px; /* Rounded corners for a nice hover effect */
+}
+
 .navbar {
-    background: #000000;
-    color: #fff;
-    padding: 10px 20px;
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
-    z-index: 1000;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-wrap: wrap;
+    z-index: 1030; /* High z-index to ensure navbar stays on top */
+    background-color: #731436; /* Brand color */
+    padding: 0.5rem 1rem; /* Adjust padding to ensure adequate space for items */
 }
 
 .navbar-brand, .nav-link, .logout-button {
     color: #fff;
     text-decoration: none;
-    padding: 10px;
-    margin: 0 5px; /* Adjust spacing between links */
+    padding: 10px 15px; /* Sufficient padding for clickable area */
+    margin-right: 5px; /* Space between items */
 }
 
-.nav-link:hover, .logout-button:hover {
-    background-color: #000000;
+.navbar-toggler {
+    border-color: rgba(255,255,255,0.5); /* Lighter border for toggle icon */
+}
+
+.nav-link:hover, .logout-button:hover, .navbar-brand:hover {
+    background-color: #5a0e2d; /* Slightly darker shade for hover state */
     border-radius: 5px;
 }
 
@@ -293,6 +348,26 @@ body {
 
 /* ABOUT */
 
+.container-fluid {
+    display: flex;  /* Enables flexbox */
+    flex-wrap: wrap;  /* Allows items to wrap to the next line */
+    justify-content: center;  /* Centers items horizontally */
+    align-items: center;  /* Centers items vertically */
+    padding: 20px;  /* Adds some padding around the items */
+    min-height: 80vh;  /* Optional: Gives a minimum height to the container */
+}
+
+.row {
+    justify-content: center;  /* Centers columns horizontally within the row */
+}
+
+.col {
+    display: flex;
+    flex-direction: column;
+    align-items: center;  /* Centers content within each column if needed */
+}
+
+
 .about-container {
     max-width: 800px;
     margin: 40px auto;
@@ -347,6 +422,32 @@ body {
 /* DASHBOARD CSS */
 
 /* Enhances Bootstrap card styling for product display */
+
+/* Ensure cards are centered and have maximum limits */
+.card {
+    max-width: 100%;  /* Ensures card does not exceed the column width */
+}
+
+.card {
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    transition: 0.3s;
+}
+.card:hover {
+    box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.mb-4{
+    padding-top: 50px;
+}
+
+
+
 .card.mb-4.shadow-sm {
     border-radius: 10px; /* Rounded corners for the card */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
@@ -386,6 +487,13 @@ body {
     color: #666; /* Lighter color for subtlety */
 }
 
+.col {
+    flex-grow: 1;  /* Allows the column to grow to fill available space */
+    min-width: 250px; /* Minimum width before a new row starts */
+    max-width: 300px; /* Maximum width of each card */
+}
+
+
 /* If you have action buttons within your cards, add styles here */
 
 
@@ -424,6 +532,13 @@ body {
     border-bottom: none;
 }
 
+.cart-icon-container {
+    display: flex;
+    align-items: center;
+    position: relative; /* Position relative to place the count badge correctly */
+}
+
+
 /* Styles for the payment mode section */
 .payment-mode {
     margin-top: 20px;
@@ -439,23 +554,6 @@ body {
     margin-top: 20px;
 }
 
-/* Styles for Cart Icon and Count Badge */
-#cartButton {
-    position: relative;
-    display: inline-block;
-}
-
-#cartCount {
-    position: absolute;
-    top: -10px;
-    right: -10px;
-    background-color: #dc3545;
-    color: #fff; /* Text color for the count badge */
-    border-radius: 50%;
-    padding: 5px;
-    font-size: 0.8rem;
-}
-
 
 
 
@@ -468,6 +566,5 @@ body {
     text-align: center; /* Center the quantity number */
 }
 
-.cart-icon-container {
-    margin-left: auto;
-}
+/* BANNER */
+
