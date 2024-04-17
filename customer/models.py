@@ -35,12 +35,11 @@ class User(models.Model):
     def __str__(self):
         return self.name
 
-
 class CartItem(models.Model):
     name = models.CharField(max_length=255)
     price = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True)
     quantity = models.IntegerField()
+    is_completed = models.BooleanField(default=False)  # Added to track if the cart item is completed
 
     def __str__(self):
         return f"{self.name} ({self.quantity})"
-

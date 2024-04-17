@@ -1,5 +1,7 @@
 {% load static %}
 
+
+
 <script type="text/javascript">
     var csrftoken = '{{ csrf_token }}';
     
@@ -9,15 +11,18 @@
 
 <nav class="navbar">
     <div class="container d-flex justify-content-between">
+
+            
+        
        
         <div class="d-flex align-items-center">
-            <a href="{% url 'customer:customer_home' %}" class="navbar-brand">Belbros Foodhub</a>
+            <a href="{% url 'customer:customer_dashboard' %}" class="navbar-brand">Bellbros Hood Hub</a>
             <a href="{% url 'customer:orders' %}" class="nav-link me-2">Your Orders</a>
             {% comment %} <a href="{% url 'payment_options' %}" class="nav-link me-2">Payment Settings</a> {% endcomment %}
             <a href="{% url 'customer:delivery_settings' %}" class="nav-link me-2">Delivery Settings</a>
             <a href="{% url 'customer:support_messages' %}" class="nav-link me-2"> Messages</a>
             <a href="{% url 'customer:about' %}" class="nav-link me-2">About</a>
-            <a href="{% url 'customer:logout' %}" class="nav-link btn btn-outline-light btn-sm">Logout</a>
+            <a href="{% url 'customer:customer_home' %}" class="nav-link btn btn-outline-light btn-sm">Logout</a>
             <input type="text" id="searchInput" placeholder="Search products...">
 
                                 <!-- Cart Button -->
@@ -46,6 +51,12 @@
                 <button id="checkoutButton" class="btn btn-secondary">Checkout</button>
             </div>
         </div>
+
+
+       
+
+
+
         </div>
     </div>
 </nav>
@@ -53,38 +64,40 @@
 <script>
     console.log("script.js is loaded and running");
 
-    // AJAX
-    headers: {
-        'Content-Type'; 'application/json',
-        'X-CSRFToken'; getCookie('csrftoken')  // Call directly here
-    }
+// AJAX
+headers: {
+    'Content-Type'; 'application/json',
+    'X-CSRFToken'; getCookie('csrftoken')  // Call directly here
+}
 
-    document.getElementById('checkoutButton').addEventListener('click', function() {
+document.getElementById('checkoutButton').addEventListener('click', function() {
 
-        console.log(cart)
-        
-        const cartData = {
-            cartItems: Object.values(cart)
-        };
+    console.log(cart)
+    
+    const cartData = {
+        cartItems: Object.values(cart)
+    };
 
-        fetch('/customer/save-cart/', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'X-CSRFToken': getCookie('csrftoken')
-            },
-            body: JSON.stringify(cartData)
-        })
-        .then(response => response.json())
-        .then(data => {
-            console.log('Success:', data);
-            alert("Checkout successful!");
-        })
-        .catch(error => {
-            console.error('Error:', error);
-            alert("Checkout failed: " + error.message);
-        });
+    fetch('/customer/save-cart/', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-CSRFToken': getCookie('csrftoken')
+        },
+        body: JSON.stringify(cartData)
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log('Success:', data);
+        alert("Checkout successful!");
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        alert("Checkout failed: " + error.message);
     });
+});
+
+
     
     function getCookie(name) {
         let cookieValue = null;
@@ -101,5 +114,8 @@
         return cookieValue;
     }
     
+
+
+
 </script>
 

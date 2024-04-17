@@ -15,9 +15,14 @@ urlpatterns = [
     path('add-scheduled-delivery/', views.add_scheduled_delivery, name='add_scheduled_delivery'),
     path('delivery-list/', views.delivery_list, name='delivery_list'),
     path('update-delivery-status/', views.update_delivery_status, name='update_delivery_status'),
+    
+    # ORDERS
     path('add_order/', views.add_order, name='add_order'),
     path('all_orders/', views.all_orders, name='all_orders'),
-    path('delete-order/<int:order_id>/', views.delete_order, name='delete_order'),
-      path('new_order/', views.new_order, name='new_order'),
+    path('delete-order/<int:order_id>/', views.delete_order, name='delete-order'),
+    path('new_order/', views.new_order, name='new_order'),
+    path('complete-cart-item/<int:item_id>/', views.complete_cart_item, name='complete_cart_item'),
+
+
 ]
 

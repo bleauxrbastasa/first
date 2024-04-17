@@ -16,23 +16,25 @@
 
  
     {% include 'navbaralt.html' %}
-    
-    <div class="login-container">
-        <h1>Welcome to Cakeaholic</h1>
-        <form id="loginForm" method="post" action="{% url 'customer:customer_login' %}">
-            {% csrf_token %}
-            <div class="input-group">
-                <label for="email">Email</label>
-                <input type="email" id="email" name="email" required>
-            </div>
-            <div class="input-group">
-                <label for="password">Password</label>
-                <input type="password" id="password" name="password" required>
-            </div>
-            <button type="submit">Login</button>
-            <p>Don't have an account? <a href="{% url 'customer:customer_signup' %}">Sign up</a></p> <!-- Fixed signup link -->
-        </form>
-    </div>
+<div style="margin-top: 20vh"class="login-container">
+    <h1>Welcome to Belbros</h1>
+    <form id="loginForm" method="post" action="{% url 'customer:customer_login' %}">
+        {% csrf_token %}
+        <div class="input-group">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" required>
+        </div>
+        <div class="input-group">
+            <label for="password">Password</label>
+            <input type="password" id="password" name="password" required>
+            <!-- Display error message here -->
+            <label for="password" class="error-label">{{ error_message }}</label>
+        </div>
+        <button type="submit">Login</button>
+        <p>Don't have an account? <a href="{% url 'customer:customer_signup' %}">Sign up</a></p> <!-- Fixed signup link -->
+    </form>
+</div>
+
 
     
 </body>

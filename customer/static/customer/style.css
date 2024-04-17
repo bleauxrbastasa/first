@@ -106,19 +106,27 @@ a:hover {
     }
 } */
 
+.mt-5{
+    padding-top: 50px;
+}
+
+body, html {
+    
+    font-family: 'Roboto', sans-serif; /* This applies the font globally */
+}
+
 
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-color: #f0f0f0;
     line-height: 1.6;
-    padding-top: 70px; /* Adjust to ensure content doesn't hide under the navbar */
-    
+    /* padding-top: 70px; Adjust to ensure content doesn't hide under the navbar */
 
     display: flex;
-    justify-content: center;
-    align-items: center;
+    flex-direction: column; /* Changed from row to column */
+    justify-content: flex-start; /* Align items from the start vertically */
+    align-items: center; /* Keeps center alignment horizontally */
     min-height: 100vh; /* Use the full height of the viewport */
-    background-color: #f0f0f0;
+   
     padding: 0; /* Remove any default padding */
     margin: 0; /* Remove any default margin */
 }
@@ -144,7 +152,7 @@ body .nav-link:hover, body .logout-button:hover {
     left: 0;
     width: 100%;
     z-index: 1030; /* High z-index to ensure navbar stays on top */
-    background-color: #731436; /* Brand color */
+    background-color: #000000; /* Brand color */
     padding: 0.5rem 1rem; /* Adjust padding to ensure adequate space for items */
 }
 
@@ -393,10 +401,22 @@ body .nav-link:hover, body .logout-button:hover {
     max-width: 100%;  /* Ensures card does not exceed the column width */
 }
 
+.card {
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    transition: 0.3s;
+}
+.card:hover {
+    box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+}
+
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+}
+
+.mb-4{
+    padding-top: 50px;
 }
 
 
@@ -518,4 +538,6 @@ body .nav-link:hover, body .logout-button:hover {
     margin-right: 10px; /* Spacing between the input field and any following content */
     text-align: center; /* Center the quantity number */
 }
+
+/* BANNER */
 

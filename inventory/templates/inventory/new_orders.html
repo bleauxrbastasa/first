@@ -4,31 +4,144 @@
 {% block content %}
 <div class="container mt-4">
     <h2 class="mb-4">Order List</h2>
-    <div class="table-responsive"> <!-- Add class for responsive table -->
-        <table class="table table-striped table-bordered">
-            <thead class="thead-dark">
-                <tr>
-                    <th>Name</th>
-                    <th>Price</th>
-                    <th>Quantity</th>
-                    <th>Actions</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for order in orders %}
-                <tr>
-                    <td>{{ order.name }}</td>
-                    <td>${{ order.price }}</td>
-                    <td>{{ order.quantity }}</td>
-                    <td>
-                        <button class="btn btn-danger btn-sm mr-2" onclick="deleteOrder('{{ order.id }}')">Delete</button>
-                        <button class="btn btn-primary btn-sm mr-2" onclick="editOrder('{{ order.id }}')">Edit</button>
-                        <button class="btn btn-success btn-sm" onclick="completeOrder('{{ order.id }}')">Complete</button>
-                    </td>
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
+    <div class="row">
+        <div class="col-md-6">
+            <h3>Pending Orders</h3>
+            <div class="table-responsive">
+                <table class="table table-striped table-bordered">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th>Name</th>
+                            <th>Price</th>
+                            <th>Quantity</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for order in orders %}
+                        {% if not order.is_completed %}
+                        <tr id="order_{{ order.id }}">
+                            <td>{{ order.name }}</td>
+                            <td>${{ order.price }}</td>
+                            <td>{{ order.quantity }}</td>
+                            <td>
+                                <button class="btn btn-danger btn-sm" onclick="deleteOrder('{{ order.id }}')">Delete</button>
+                                <button class="btn btn-primary btn-sm" onclick="editOrder('{{ order.id }}')">Edit</button>
+                                <button class="btn btn-success btn-sm" onclick="completeOrder('{{ order.id }}')">Complete</button>
+                            </td>
+                        </tr>
+                        {% endif %}
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <h3>Completed Orders</h3>
+            <div class="table-responsive">
+                <table class="table table-striped table-bordered">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th>Name</th>
+                            <th>Price</th>
+                            <th>Quantity</th>
+                        </tr>
+                    </thead>
+                    <tbody id="completedOrders">
+                        {% for order in orders %}
+                        {% if order.is_completed %}
+                        <tr>
+                            <td>{{ order.name }}</td>
+                            <td>${{ order.price }}</td>
+                            <td>{{ order.quantity }}</td>
+                        </tr>
+                        {% endif %}
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
     </div>
 </div>
+<script>
+    // Function to delete an order
+    function deleteOrder(orderId) {
+        if (confirm('Are you sure you want to delete this order?')) {
+            fetch(`/inventory/delete-order/${orderId}/`, { // Updated fetch URL to match the expected Django path
+                method: 'POST',
+                headers: {
+                    'X-CSRFToken': getCookie('csrftoken'), // Ensure CSRF token is correctly retrieved
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({}) // Send an empty JSON body
+            }).then(response => response.json()) // Convert response to JSON
+            .then(data => {
+                if (data.success) {
+                    alert('Order deleted successfully!');
+                    window.location.reload(); // Reload the page to update the list of orders
+                } else {
+                    alert('Failed to delete the order: ' + data.error);
+                }
+            }).catch(error => {
+                console.error('Error:', error);
+                alert("Error deleting the order: " + error.message);
+            });
+        }
+    }
+
+    // Helper function to get CSRF token from cookies
+    function getCookie(name) {
+        let cookieValue = null;
+        if (document.cookie && document.cookie !== '') {
+            const cookies = document.cookie.split(';');
+            for (let i = 0; i < cookies.length; i++) {
+                const cookie = cookies[i].trim();
+                if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                    cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                    break;
+                }
+            }
+        }
+        return cookieValue;
+
+    }
+
+
+    function completeOrder(orderId) {
+        fetch(`/inventory/complete-cart-item/${orderId}/`, {
+            method: 'POST',
+            headers: {
+                'X-CSRFToken': getCookie('csrftoken'),  // Ensure CSRF token is passed
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({})  // Even if empty, good to maintain structure
+        }).then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                alert('Order completed successfully!');
+                // Optionally, move the row to completed orders table or hide it
+                const orderRow = document.getElementById('order_' + orderId);
+                document.getElementById('completedOrders').appendChild(orderRow);
+                orderRow.remove();  // Or hide it: orderRow.style.display = 'none';
+            } else {
+                alert('Failed to complete the order.');
+            }
+        }).catch(error => {
+            console.error('Error:', error);
+            alert("Ccompleting the order:");
+            window.location.reload(); // Reload the page to update the list of orders
+        });
+    }
+    
+
+
+
+    
+
+</script>
+
+
 {% endblock %}
+
+
+        

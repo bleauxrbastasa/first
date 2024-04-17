@@ -19,6 +19,7 @@ def inventory(request):
         items_by_vendor[vendor] = inventoryItem.objects.filter(vendor=vendor)
     return render(request, 'inventory/inventory.html', {'items_by_vendor': items_by_vendor})
 
+
 def customer(request):
 	return render(request, 'inventory/customer.html')
 
@@ -129,6 +130,33 @@ def delete_order(request, order_id):
 
 from customer.models import CartItem
 def new_order(request):
-    orders = CartItem.objects.all()
+    orders = CartItem.objects.all() 
     return render(request, 'inventory/new_orders.html', {'orders': orders})
 	
+from django.http import JsonResponse
+from django.shortcuts import get_object_or_404
+from django.views.decorators.http import require_POST
+from customer.models import CartItem
+
+@require_POST
+def delete_order(request, order_id):
+    order = get_object_or_404(CartItem, id=order_id)
+    order.delete()
+    return JsonResponse({'success': True})
+
+
+from django.http import JsonResponse
+from django.views.decorators.http import require_POST
+from customer.models import CartItem  # Make sure to import CartItem correctly
+
+from django.http import JsonResponse
+from django.shortcuts import get_object_or_404, redirect
+from django.views.decorators.http import require_POST
+from customer.models import CartItem
+
+@require_POST
+def complete_cart_item(request, item_id):
+    item = get_object_or_404(CartItem, id=item_id)
+    item.is_completed = True
+    item.save()
+    return redirect('new_order')  # Make sure this is the correct name of the view you want to redirect to.
